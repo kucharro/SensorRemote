@@ -9,17 +9,27 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity  implements View.OnClickListener {
 
     private Button button;
+    private TextView textView;
+
+    int counter=0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initListeners();
+        textView = (TextView) findViewById(R.id.HelloTextView);
+        textView.setText(Integer.toString(counter));
+
+
+
     }
 
     private void initListeners() {
@@ -53,6 +63,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.HelloButton)
-            Toast.makeText(this,"Yay, you clicked!", Toast.LENGTH_SHORT).show();
+            textView.setText(Integer.toString(++counter));
+
     }
 }
