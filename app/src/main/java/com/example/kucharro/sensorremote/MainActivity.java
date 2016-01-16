@@ -1,5 +1,6 @@
 package com.example.kucharro.sensorremote;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,7 +15,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity  implements View.OnClickListener {
 
-    private Button button;
+    private Button buttonDown, buttonUp, buttonNewActivity;
     private TextView textView;
 
     int counter=0;
@@ -28,13 +29,17 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         textView = (TextView) findViewById(R.id.HelloTextView);
         textView.setText(Integer.toString(counter));
 
-
-
     }
 
     private void initListeners() {
-        button = (Button) findViewById(R.id.HelloButton);
-        button.setOnClickListener(this);
+        buttonDown = (Button) findViewById(R.id.HelloButtonDown);
+        buttonDown.setOnClickListener(this);
+
+        buttonUp = (Button) findViewById(R.id.HelloButtonUp);
+        buttonUp.setOnClickListener(this);
+
+        buttonNewActivity = (Button) findViewById(R.id.HelloButtonNewActivity);
+        buttonNewActivity.setOnClickListener(this);
 
     }
 
@@ -62,8 +67,22 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.HelloButton)
-            textView.setText(Integer.toString(++counter));
+        if(v.getId() == R.id.HelloButtonDown) {
+            textView.setText(Integer.toString(--counter));
+            }
 
+        if(v.getId() == R.id.HelloButtonUp){
+            textView.setText(Integer.toString(++counter));
+        }
+        if(v.getId() == R.id.HelloButtonNewActivity) {
+            Intent intent = new Intent(this, ActivityTwo.class);
+            intent.putExtra("NAZWA", "Kamil");
+            startActivity(intent);
+        }
+        if(counter == 0) {
+            textView.setText("BANG!!!");
+            textView.setTextColor(getResources().getColor(R.color.colorAccent));
+            textView.setTextSize(90);}
     }
+
 }
